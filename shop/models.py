@@ -9,7 +9,7 @@ class User(AbstractUser):
     gsm_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     gsm = models.CharField(validators=[gsm_regex], max_length=15, blank=True) # validators should be a list
     role = models.IntegerField()
-    #firm = models.OneToOneField(Firm)
+    firm = models.OneToOneField('Firm', null=True)
 
     def __str__(self):
         return "{id}-{name}-{sname}".format(id=self.id, name=self.name,sname=self.surname)
