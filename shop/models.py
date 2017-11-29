@@ -36,3 +36,8 @@ class Photo(models.Model):
     path = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
 
+class Brand(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return "{title}".format(title=self.name)
