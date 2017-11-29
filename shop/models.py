@@ -41,3 +41,22 @@ class Brand(models.Model):
 
     def __str__(self):
         return "{title}".format(title=self.name)
+
+class Vehicle(models.Model):
+    model = models.PositiveIntegerField(max_length=4)
+    brand = models.ForeignKey(Brand, null=False)
+    description = models.CharField(max_length=255)
+    km = models.PositiveIntegerField()
+    engine = models.FloatField()
+    transmission = models.CharField(max_length=10)
+    fuel = models.CharField(max_length=10)
+    color = models.CharField(max_length=50)
+    price = models.FloatField()
+    user = models.ForeignKey(User, null=True)
+    category = models.ForeignKey(Category, null=True)
+    photo = models.OneToOneField(Photo, null=True)
+    firm = models.ForeignKey(Firm, null=True)
+    searched_counter = models.IntegerField(default=0)
+
+    def __str__(self):
+        return "{model}-{brand}".format(model=self.model, brand = self.brand)
