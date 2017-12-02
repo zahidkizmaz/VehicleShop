@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from . import views
+from shop.views import CategoryView
 
 urlpatterns = [
-                url(r'^categories/$', views.Category), 
+                url(r'^category$', CategoryView.as_view(), name="categorylist"), 
         
         ]
