@@ -1,5 +1,7 @@
 {% extends "shop/base.html" %}
 {% block body %}
 
-selaaammmm!!!
+	{% for cat in categorylist %}
+		{{ cat.name }} - {{ cat.description }}
+	{% endfor %}
 {% endblock %}
