@@ -1,0 +1,11 @@
+{% extends "shop/base.html" %}
+
+{% block body %}
+
+<form style="text-align:center;" action="." method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+	{{ form }}
+	<button type="submit">Login</button>
+
+{% endblock %}
