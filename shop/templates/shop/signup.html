@@ -1,0 +1,11 @@
+
+{% extends "shop/base.html" %}
+{% block body %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Signup</button>
+</form>
+
+{% endblock %}

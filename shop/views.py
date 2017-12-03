@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from shop.forms import CustomUserCreationForm
 from .models import Category, Vehicle, Firm
 from django.views import generic
 
@@ -33,5 +33,12 @@ class FirmView(generic.ListView):
         context["firmlist"] = Firm.objects.all()
         return context
 
-
+class RegistrationView(generic.FormView):
+    form_class = CustomUserCreationForm
+    template_name = "shop/signup.html"
+    success_url = "/"
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
     
