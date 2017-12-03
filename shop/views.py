@@ -10,7 +10,7 @@ class CategoryView(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categorylist"] = self.get_queryset()
+        context["categorylist"] = Category.objects.all() 
         return context
 
 class HomePageView(generic.ListView):
