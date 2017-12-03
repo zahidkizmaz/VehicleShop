@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<form style="text-align:center;" action="/" method="POST">
+<form style="text-align:center;" action="." method="POST">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
 	{{ form }}
