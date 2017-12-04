@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from shop.forms import CustomUserCreationForm
-from .models import Category, Vehicle, Firm
+from .models import Category, Vehicle, Firm, Brand
 from django.views import generic
 
 class CategoryView(generic.ListView):
@@ -41,4 +41,15 @@ class RegistrationView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
+
+
+class BrandView(generic.ListView):
+
+    def get_queryset(self):
+        return Brand.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["brandlist"] = Brand.objects.all()
+        return context
+

@@ -5,3 +5,5 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Vehicle)
 admin.site.register(Category)
+admin.site.register(Firm)
+admin.site.register(Brand)
