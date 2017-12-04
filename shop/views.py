@@ -33,14 +33,15 @@ class FirmView(generic.ListView):
         context["firmlist"] = Firm.objects.all()
         return context
 
+
 class RegistrationView(generic.FormView):
     form_class = CustomUserCreationForm
-    template_name = "shop/signup.html"
-    success_url = "/"
-    
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+    initial = {'key': 'value'}
+    template_name = 'shop/signup.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
 
 
 class BrandView(generic.ListView):
