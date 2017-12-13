@@ -1,7 +1,10 @@
 {% load static %}
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html>
 <head>
+	{% bootstrap_css %}
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<meta charset="utf-8">
 	<title>Title </title>
 </head>
@@ -12,9 +15,10 @@
 	<a href={% url "firmlist" %}>Firms<a/>
 	<a href={% url "login" %}>Login<a/>
 	<hr>
-	<br/>
-			
+	
+	<div class="container">
 	{% block body %}
 
 	{% endblock %}
+	</div>
 </html>
