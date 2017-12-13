@@ -76,8 +76,7 @@ class CreateVehicleView(LoginRequiredMixin, generic.CreateView):
 class CreateBrandView(LoginRequiredMixin,generic.CreateView):
     form_class = CreateBrandForm
     template_name = "shop/create_brand.html"
-    success_url = "."
-    
+    success_url = "/"
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
