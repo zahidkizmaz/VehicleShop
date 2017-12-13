@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from shop.models import User
+from shop.models import User, Vehicle
 from .models import Firm
 from django.core.validators import RegexValidator
+from django.forms import HiddenInput
 
 class CustomUserCreationForm(UserCreationForm):
     firms = Firm.objects.all().values_list()
@@ -22,3 +23,18 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         """
+
+class CreateVehicleForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CreateVehicleForm,self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Vehicle
+        exclude = [
+            "id",
+        ]
+
+        widgets = {
+            "user": HiddenInput()
+        }
