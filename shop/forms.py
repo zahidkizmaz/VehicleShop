@@ -5,7 +5,6 @@ from shop.models import User
 from .models import Firm
 from django.core.validators import RegexValidator
 
-
 class CustomUserCreationForm(UserCreationForm):
     firms = Firm.objects.all().values_list()
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -17,3 +16,9 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'role', 'firm', 'gsm',  'password1', 'password2')
+       
+"""
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        """

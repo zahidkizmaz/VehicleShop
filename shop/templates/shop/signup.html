@@ -4,17 +4,8 @@
 
 <form action="" method="POST">
     {% csrf_token %}
-    Username : {{ form.username }}<br>
-    First Name : {{ form.first_name }}<br>
-    Last Name : {{ form.last_name }}<br>
-    Email : {{ form.email }}<br>
-    Role : {{ form.role }}<br>
-    Firm : {{ form.firm }}<br>
-    GSM : {{ form.gsm }}<br>
-    Password : {{ form.password1 }}<br>
-    Password again: {{ form.password2 }}
-
-    <button type="submit">Signup</button>
+{{ form.as_p }}
+<button type="submit">Signup</button>
 </form>
 
 {% endblock %}
