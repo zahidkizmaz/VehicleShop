@@ -61,9 +61,9 @@ class Vehicle(models.Model):
     color = models.CharField(max_length=50)
     price = models.FloatField()
     user = models.ForeignKey(User, null=True)
-    category = models.ForeignKey(Category, null=True)
-    photo = models.OneToOneField(Photo, null=True)
-    firm = models.ForeignKey(Firm, null=True)
+    category = models.ForeignKey(Category, null=True, blank = True)
+    photo = models.OneToOneField(Photo, null=True, blank = True)
+    firm = models.ForeignKey(Firm, null=True, blank = True)
     searched_counter = models.IntegerField(default=0)
 
     def __str__(self):
@@ -106,8 +106,8 @@ class SoldVehicles(models.Model):
     price = models.FloatField()
     user = models.ForeignKey(User, null=True)
     category = models.ForeignKey(Category, null=True)
-    photo = models.OneToOneField(Photo, null=True)
-    firm = models.ForeignKey(Firm, null=True)
+    photo = models.OneToOneField(Photo, null=True, blank = True)
+    firm = models.ForeignKey(Firm, null=True, blank = True)
     searched_counter = models.IntegerField(default=0)
 
     def __str__(self):

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from shop.models import User, Vehicle
+from shop.models import User, Vehicle, Brand
 from .models import Firm
 from django.core.validators import RegexValidator
 from django.forms import HiddenInput
@@ -18,11 +18,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'role', 'firm', 'gsm',  'password1', 'password2')
        
-"""
-class CustomUserCreationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        """
 
 class CreateVehicleForm(forms.ModelForm):
 
@@ -38,3 +33,20 @@ class CreateVehicleForm(forms.ModelForm):
         widgets = {
             "user": HiddenInput()
         }
+
+
+class CreateBrandForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CreateBrandForm,self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Brand
+        exclude = [
+            "id",
+        ]
+
+        widgets = {
+            "user": HiddenInput()
+        }
+

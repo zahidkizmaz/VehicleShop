@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from shop.forms import CustomUserCreationForm, CreateVehicleForm
+from shop.forms import CustomUserCreationForm, CreateVehicleForm, CreateBrandForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, Vehicle, Firm, Brand
 from django.views import generic
@@ -71,3 +71,32 @@ class CreateVehicleView(LoginRequiredMixin, generic.CreateView):
             post_data["user"] = self.request.user.id
             kwargs["data"] = post_data
         return kwargs
+
+class CreateBrandView(LoginRequiredMixin, generic.CreateView):
+    form_class = CreateBrandForm
+    template_name = "shop/create_brand.html"
+    success_url = "/"
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.method in ["POST", "PUT"]:
+            post_data = kwargs["data"].copy()
+            post_data["user"] = self.request.user.id
+            kwargs["data"] = post_data
+        return kwargs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
