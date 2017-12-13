@@ -72,20 +72,15 @@ class CreateVehicleView(LoginRequiredMixin, generic.CreateView):
             kwargs["data"] = post_data
         return kwargs
 
-class CreateBrandView(LoginRequiredMixin, generic.CreateView):
+
+class CreateBrandView(LoginRequiredMixin,generic.CreateView):
     form_class = CreateBrandForm
     template_name = "shop/create_brand.html"
-    success_url = "/"
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.request.method in ["POST", "PUT"]:
-            post_data = kwargs["data"].copy()
-            post_data["user"] = self.request.user.id
-            kwargs["data"] = post_data
-        return kwargs
-
-
+    success_url = "."
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 

@@ -23,7 +23,6 @@ class CreateVehicleForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CreateVehicleForm,self).__init__(*args, **kwargs)
-
     class Meta:
         model = Vehicle
         exclude = [
@@ -46,7 +45,4 @@ class CreateBrandForm(forms.ModelForm):
             "id",
         ]
 
-        widgets = {
-            "user": HiddenInput()
-        }
-
+    
