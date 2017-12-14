@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from shop.forms import CustomUserCreationForm, CreateVehicleForm, CreateBrandForm,CreateFirmForm,AddMemberForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -86,11 +87,51 @@ class CreateBrandView(LoginRequiredMixin,generic.CreateView):
         form.save()
         return super().form_valid(form)
 
-class CreateFirmView(LoginRequiredMixin,generic.FormView):
+
+class VehicleView(generic.DetailView):
+   
+    def get_queryset(self):
+        return Vehicle.objects.all()
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        return context
+
+
+class DeleteVehicleView(generic.DeleteView):
+    model = Vehicle
+    template_name = 'shop/delete_vehicle.html'
+    context_object_name = 'vehicle'
+    success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        return Vehicle.objects.all()
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        return context
+
+
+class UpdateVehicleView(generic.UpdateView):
+    model = Vehicle
+    fields=['model', 'brand', 'description', 'km', 'engine', 'transmission', 'fuel', 'color', 'price', 'category', 'photo', 'firm' ]
+    context_object_name = 'vehicle'
+    template_name = 'shop/update_vehicle.html'
+   
+    def get_success_url(self):
+        return reverse('vehicledetail', kwargs={'pk': self.object.id})
+
+
+class CreateFirmView(LoginRequiredMixin, generic.FormView):
     form_class = CreateFirmForm
     template_name = "shop/create_firm.html"
     success_url = reverse_lazy('createfirm')
     second_form_class = AddMemberForm
+
     def get_context_data(self, **kwargs):
         context = super(CreateFirmView, self).get_context_data(**kwargs)
         try:
@@ -104,11 +145,8 @@ class CreateFirmView(LoginRequiredMixin,generic.FormView):
         return context
 
     def post(self, request, *args, **kwargs):
-
-        print(request.POST)
         if 'mail' in request.POST:
             form_class = self.get_form_class()
-            print("OK")
         else:
             print("Fail")
             form_class = self.second_form_class
@@ -118,7 +156,6 @@ class CreateFirmView(LoginRequiredMixin,generic.FormView):
         # validate
         if form.is_valid():
             return self.form_valid(form)
-
 
     def form_valid(self, form):
         try:

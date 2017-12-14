@@ -1,0 +1,9 @@
+{% extends "shop/base.html" %}
+{% block body %}
+<br>
+<div class="well">
+	{% for v in vehicle%}
+	{{v}} - <a href="{% url "updatevehicle" pk=v.pk %}">Edit</a> - <a href="{% url "vehicledelete" pk=v.pk %}">Buy</a>
+	{% endfor %}
+</div>
+{% endblock %}
