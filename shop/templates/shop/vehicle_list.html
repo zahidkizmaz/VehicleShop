@@ -1,7 +1,9 @@
 {% extends "shop/base.html" %}
-
+{% load bootstrap3%}
 {% block body %}
 	{% for v in vehiclelist %}
-		{{veh}} <br/>
+	<div class="well">
+	<a href="{% url "vehicledetail" pk=v.pk %}">{{v}}</a>
+	</div>
 	{% endfor %}
 {% endblock %}
