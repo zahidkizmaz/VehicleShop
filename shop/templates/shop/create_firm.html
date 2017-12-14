@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+{% load bootstrap3 %}
+
+{% block body %}
+	{% for u in users %}
+		{{u}} <br/>
+	{% endfor %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit">Add</button>
+    </form>
+{% endblock %}

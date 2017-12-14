@@ -45,4 +45,21 @@ class CreateBrandForm(forms.ModelForm):
             "id",
         ]
 
-    
+
+class CreateFirmForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CreateFirmForm,self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Firm
+        exclude = [
+            "id",
+            "manager"
+        ]
+
+class AddMemberForm(forms.Form):
+    u=tuple((m.id, m.username) for m in User.objects.all())
+    user = forms.ChoiceField(choices=u, required=True, initial="Select a User")
+
+
