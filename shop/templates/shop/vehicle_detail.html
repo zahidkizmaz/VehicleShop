@@ -2,7 +2,8 @@
 {% block body %}
 <br>
 <div class="well">
-	{{vehicle}}
-	<a href="{% url "vehicledelete" pk=vehicle.pk %}">Buy</a>
+	{% for v in vehicle%}
+		{{v}} - <a href="{% url "vehicledelete" pk=v.pk %}">Buy</a>
+	{% endfor %}
 </div>
 {% endblock %}
