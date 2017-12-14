@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from shop.forms import CustomUserCreationForm, CreateVehicleForm, CreateBrandForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -109,3 +109,27 @@ class DeleteVehicleView(generic.DeleteView):
         context = super().get_context_data(**kwargs)
         context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
         return context
+
+
+
+class UpdateVehicleView(generic.UpdateView):
+    model = Vehicle
+    fields=['model', 'brand', 'description', 'km', 'engine', 'transmission', 'fuel', 'color', 'price', 'category', 'photo', 'firm' ]
+    context_object_name = 'vehicle'
+    template_name = 'shop/update_vehicle.html'
+   
+    def get_success_url(self):
+        return reverse('vehicledetail', kwargs={'pk': self.object.id})
+
+
+
+
+
+
+
+
+
+
+
+
+
