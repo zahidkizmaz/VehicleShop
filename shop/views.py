@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from shop.forms import CustomUserCreationForm, CreateVehicleForm, CreateBrandForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -94,8 +95,17 @@ class VehicleView(generic.DetailView):
         return context
 
 
+class DeleteVehicleView(generic.DeleteView):
+    model = Vehicle
+    template_name = 'shop/delete_vehicle.html'
+    context_object_name = 'vehicle'
+    success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        return Vehicle.objects.all()
 
 
-
-
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        return context
