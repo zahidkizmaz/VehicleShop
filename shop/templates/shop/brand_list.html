@@ -1,0 +1,7 @@
+{% extends "shop/base.html" %}
+{% block body %}
+	{% for b in brandlist %}
+	<a href="{% url "brandvehiclelist" pk=b.pk  %}">{{b}}</a>
+		<br/>
+	{% endfor %}
+{% endblock %}
