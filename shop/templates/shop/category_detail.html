@@ -6,4 +6,6 @@
     <a style="color:black;" href="{% url "vehicledetail" pk=v.pk %}"><h4><strong>{{v}}</strong></h4></a>
 </div>
 {% endfor %}
+
+<a href="{% url "catveh" pk=cat.pk %} " > Get this page as PDF!  </a>
 {% endblock %}

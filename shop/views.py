@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, Vehicle, Firm, Brand, User
 from django.views import generic
 from django.core.urlresolvers import reverse_lazy
+from easy_pdf.views import PDFTemplateView, PDFTemplateResponseMixin
+
 
 class CategoryView(generic.ListView):
 
@@ -180,12 +182,21 @@ class CategoryDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["vehiclelist"] = Vehicle.objects.filter(category__pk=self.kwargs["pk"]).order_by("searched_counter")
+        context["cat"] = Category.objects.get(pk=self.kwargs.get("pk"))
         return context
 
 
-
-
-
+class CategoryVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
+    model = Category
+    template_name = 'categoryvehicles_pdf.html'
+    download_filename = 'catveh.pdf'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehiclelist"] = Vehicle.objects.filter(category__pk=self.kwargs["pk"]).order_by("searched_counter")
+        context["pagesize"] = 'A4'
+        context["title"] = 'Category Details'
+        return context
 
 
 
