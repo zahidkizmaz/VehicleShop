@@ -199,7 +199,17 @@ class CategoryVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
         return context
 
 
-
+class VehiclesPDFView(PDFTemplateResponseMixin, generic.DetailView):
+    model = Vehicle
+    template_name = 'vehiclepdf.html'
+    download_filename = 'veh.pdf'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        context["pagesize"] = 'A4'
+        context["title"] = 'Vehicle Details'
+        return context
 
 
 

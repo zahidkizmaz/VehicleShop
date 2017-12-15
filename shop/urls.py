@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from shop.forms import CustomUserCreationForm, CreateVehicleForm
-from shop.views import CategoryView , HomePageView, FirmView, RegistrationView, BrandView, CreateVehicleView, CreateBrandView,CreateFirmView,VehicleView, DeleteVehicleView, UpdateVehicleView, CategoryDetailView, CategoryVehiclesView
+from shop.views import CategoryView , HomePageView, FirmView, RegistrationView, BrandView, CreateVehicleView, CreateBrandView,CreateFirmView,VehicleView, DeleteVehicleView, UpdateVehicleView, CategoryDetailView, CategoryVehiclesView, VehiclesPDFView
 
 urlpatterns = [
         url(r'^$', HomePageView.as_view(), name="home"),
@@ -15,6 +15,7 @@ urlpatterns = [
         url(r'^vehicle/(?P<pk>\d+)/$', VehicleView.as_view(), name="vehicledetail" ),
         url(r'^vehicle/(?P<pk>\d+)/delete/$',DeleteVehicleView.as_view() , name="vehicledelete" ),
         url(r'^vehicle/(?P<pk>\d+)/update/$',UpdateVehicleView.as_view() , name="updatevehicle" ),
+        url(r'^vehicle/(?P<pk>\d+)/vehicle.pdf$', VehiclesPDFView.as_view(), name="vehiclepdf"),
         url(r'^create_firm/$', CreateFirmView.as_view(), name="createfirm"),
       ]
 

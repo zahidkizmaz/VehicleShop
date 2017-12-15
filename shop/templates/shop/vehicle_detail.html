@@ -4,6 +4,10 @@
 <div class="well">
 	{% for v in vehicle%}
 	{{v}} - <a href="{% url "updatevehicle" pk=v.pk %}">Edit</a> - <a href="{% url "vehicledelete" pk=v.pk %}">Buy</a>
+	</br>
+	<a href="{% url "vehiclepdf" pk=v.pk %}"> Get this page as a PDF! </a>
 	{% endfor %}
 </div>
+
+
 {% endblock %}
