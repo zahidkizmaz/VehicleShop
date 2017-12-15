@@ -1,0 +1,9 @@
+{% extends "shop/base.html" %}
+{% block body %}
+<br>
+{% for v in vehiclelist %}
+<div class="well">
+    <a style="color:black;" href="{% url "vehicledetail" pk=v.pk %}"><h4><strong>{{v}}</strong></h4></a>
+</div>
+{% endfor %}
+{% endblock %}

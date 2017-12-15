@@ -2,7 +2,7 @@
 {% block body %}
 	category list:
 	{% for cat in categorylist %}
-		{{ cat.name }} - {{ cat.description }}
+	<a href="{% url "categoryvehiclelist" pk=cat.pk  %}">	{{ cat.name }} - {{ cat.description }}</a>
 		<br/>
 	{% endfor %}
 {% endblock %}

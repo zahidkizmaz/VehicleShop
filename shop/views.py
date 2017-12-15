@@ -170,3 +170,26 @@ class CreateFirmView(LoginRequiredMixin, generic.FormView):
             u.firm = Firm.objects.get(manager=u)
             u.save()
         return super().form_valid(form)
+
+
+class CategoryDetailView(generic.DetailView):
+
+    def get_queryset(self):
+        return Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehiclelist"] = Vehicle.objects.filter(category__pk=self.kwargs["pk"]).order_by("searched_counter")
+        return context
+
+
+
+
+
+
+
+
+
+
+
+
