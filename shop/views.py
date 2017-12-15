@@ -222,3 +222,16 @@ class BrandDetailView(generic.DetailView):
         context["brand"] = Brand.objects.get(pk=self.kwargs.get("pk"))
         return context
 
+
+
+class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
+    model = Brand
+    template_name = 'brandvehicles_pdf.html'
+    download_filename = 'brveh.pdf'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["brandlist"] = Vehicle.objects.filter(brand__pk=self.kwargs["pk"]).order_by("searched_counter")
+        context["pagesize"] = 'A4'
+        context["title"] = 'Brand Details'
+        return context
