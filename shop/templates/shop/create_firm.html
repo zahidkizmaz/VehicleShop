@@ -2,13 +2,22 @@
 {% load bootstrap3 %}
 
 {% block body %}
-	{% for u in users %}
-		{{u}} <br/>
-	{% endfor %}
-
-    <form action="" method="POST">
-        {% csrf_token %}
+<div class="jumbotron">
+  {% if form.user %}
+    <h1 class="display-3">Add Employee</h1>
+  {% else %}
+    <h1 class="display-3">Create Firm</h1>
+  {% endif %}
+  <form action="" method="POST">
+    {% csrf_token %}
     {% bootstrap_form form %}
-    <button type="submit">Add</button>
-    </form>
+      <p class="lead">
+          {% if form.user %}
+            <button class="btn btn-warning btn-lg" type="submit">Add Employee</button>
+          {% else %}
+            <button class="btn btn-warning btn-lg" type="submit">Create Firm</button>
+          {% endif %}
+        </p>
+  </form>
+</div>
 {% endblock %}

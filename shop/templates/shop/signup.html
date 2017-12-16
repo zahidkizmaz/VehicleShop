@@ -3,11 +3,16 @@
 {% load bootstrap3 %}
 {% block body %}
 
-<form action="" method="POST">
+<div class="jumbotron">
+  <h1 class="display-3">Sign Up</h1>
+  <form action="" method="POST">
     {% csrf_token %}
-{% bootstrap_form form %}
-<button type="submit">Signup</button>
-</form>
+    {% bootstrap_form form %}
+      <p class="lead">
+    <button class="btn btn-warning btn-lg" type="submit">Sign Up</button>
+        </p>
+  </form>
+</div>
 
 {% endblock %}
 {#('username', 'first_name', 'last_name', 'email', 'role', 'firm', 'gsm',  'password1', 'password2')#}
