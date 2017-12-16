@@ -1,12 +1,15 @@
 {% extends "shop/base.html" %}
 {% block body %}
-{{brand}}
-
-<br>
-{% for v in vehiclelist %}
-<div class="well">
-    <a style="color:black;" href="{% url "vehicledetail" pk=v.pk %}"><h4><strong>{{v}}</strong></h4></a>
+<div class="jumbotron">
+    <h1 class="display-3">{{brand}}</h1>
+    <div class="list-group">
+        {% for v in vehiclelist %}
+          <a href="{% url "vehicledetail" pk=v.pk %}" class="list-group-item list-group-item-action">
+            {{v}}
+          </a>
+        {% endfor %}
+    </div>
+    <br>
+        <a class="btn btn-outline-warning" href="{% url "brveh" pk=brand.pk %} " > Get this page as PDF!  </a>
 </div>
-{% endfor %}
-<a href="{% url "brveh" pk=brand.pk %} " > Get this page as PDF! </a>
 {% endblock %}

@@ -1,7 +1,19 @@
 {% extends "shop/base.html" %}
 {% block body %}
+<div class="jumbotron">
+  <h1 class="display-3">Brand List</h1>
+	<div class="list-group">
 	{% for b in brandlist %}
-	<a href="{% url "brandvehiclelist" pk=b.pk  %}">{{b}}</a>
-		<br/>
+		{%if forloop.counter|divisibleby:2 %}
+  		<a href="{% url "brandvehiclelist" pk=b.pk  %}" class="list-group-item list-group-item-action">
+			{{b}}
+		</a>
+		{%else%}
+  		<a href="{% url "brandvehiclelist" pk=b.pk  %}" class="list-group-item list-group-item-action active">
+			{{b}}
+		</a>
+		{%endif%}
 	{% endfor %}
+	</div>
+</div>
 {% endblock %}
