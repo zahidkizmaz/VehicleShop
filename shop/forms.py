@@ -62,7 +62,7 @@ class CreateFirmForm(forms.ModelForm):
         ]
 
 class AddMemberForm(forms.Form):
-    u=tuple((m.id, m.username) for m in User.objects.all())
+    u=tuple((m.id, m.username)   for m in User.objects.all() if  m.firm is None and m.role != 1)
     user = forms.ChoiceField(choices=u, required=True, initial="Select a User")
 
 
