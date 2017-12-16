@@ -12,7 +12,7 @@ class User(AbstractUser):
     gsm_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     gsm = models.CharField(validators=[gsm_regex], max_length=15, blank=True) # validators should be a list
     role = models.IntegerField(null=True, blank=True)
-    firm = models.OneToOneField('Firm', null=True, blank=True)
+    firm = models.ForeignKey('Firm', null=True, blank=True)
 
     def __str__(self):
         return "{id}-{name}".format(id=self.id, name=self.username)
@@ -24,7 +24,7 @@ class Firm(models.Model):
     mail = models.EmailField(unique=True, blank = False)
     gsm_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     gsm = models.CharField(validators=[gsm_regex], max_length=15, blank=True) # validators should be a list
-    manager = models.OneToOneField(User, related_name = 'firm_manager_user') 
+    manager = models.OneToOneField(User, related_name = 'firm_manager_user')
 
     def __str__(self):
         return "{id}-{name}".format(id=self.id, name=self.name)
