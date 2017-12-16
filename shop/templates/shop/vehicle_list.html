@@ -2,14 +2,21 @@
 {% load bootstrap3%}
 {% block body %}
 
-<div class="card border-warning mb-3" style="">
+{% if not user.is_authenticated %}
+<center>
+<div class="card border-warning mb-3" style="max-width: 30rem;">
   <div class="card-header">Hoş Geldiniz</div>
   <div class="card-body text-warning">
-    <h4 class="card-title">Şimdi başlayın...</h4>
+    <h4 class="card-title"><a class="btn btn-outline-warning" href="{% url "register" %}"> Şimdi başlayın...</a></h4>
     <p class="card-text">Keyifli bir alışveriş için doğru yerdesiniz. </p>
   </div>
 </div>
+</center>
 <br>
+{%endif%}
+
+<div class="jumbotron">
+        <h1 class="display-3">Vehicles</h1>
 <div class="list-group">
 	{% for v in vehiclelist %}
 	{%if forloop.counter|divisibleby:2 %}
@@ -26,6 +33,7 @@
   </a>
 	{% endfor %}
 
+</div>
 </div>
 
 {% endblock %}

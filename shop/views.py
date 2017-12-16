@@ -33,7 +33,7 @@ class HomePageView(generic.ListView):
             context["role"] = False
         return context
 
-class FirmView(generic.ListView):
+class FirmView(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         return Firm.objects.all()
@@ -102,7 +102,7 @@ class VehicleView(generic.DetailView):
         return context
 
 
-class DeleteVehicleView(generic.DeleteView):
+class DeleteVehicleView(LoginRequiredMixin,generic.DeleteView):
     model = Vehicle
     template_name = 'shop/delete_vehicle.html'
     context_object_name = 'vehicle'
@@ -118,7 +118,7 @@ class DeleteVehicleView(generic.DeleteView):
         return context
 
 
-class UpdateVehicleView(generic.UpdateView):
+class UpdateVehicleView(LoginRequiredMixin,generic.UpdateView):
     model = Vehicle
     fields=['model', 'brand', 'description', 'km', 'engine', 'transmission', 'fuel', 'color', 'price', 'category', 'photo', 'firm' ]
     context_object_name = 'vehicle'

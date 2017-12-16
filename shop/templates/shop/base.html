@@ -23,11 +23,12 @@
 			<a class="nav-link" href={% url "home" %}>Home<a/>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href={% url "register" %}>Signup<a/>
-		  </li>
-		  <li class="nav-item">
 			<a class="nav-link" href={% url "categorylist" %}>Categories<a/>
 		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "brandlist" %}>  Brands </a>
+		  </li>
+			{% if user.is_authenticated %}
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "firmlist" %}>Firms<a/>
 		  </li>
@@ -37,18 +38,25 @@
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "createbrand" %}> Create Brand </a>
 		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href={% url "brandlist" %}>  Brands </a>
-		  </li>
 		  {%if role%}
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "createfirm" %}> Create Firm/Add Member </a>
 		  </li>
 		  {%endif%}
+		  {%endif%}
 		</ul>
+		  {% if not user.is_authenticated %}
+		  <li class="nav-item form-inline my-2 my-lg-0">
+			<a class="nav-link" style="color:#fff;" href={% url "register" %}>Signup<a/>
+		  </li>
 		  <li class="nav-item form-inline my-2 my-lg-0">
 			<a class="nav-link" style="color:#fff;" href={% url "login" %}>Login<a/>
 		  </li>
+		  {%else%}
+		  <li class="nav-item form-inline my-2 my-lg-0">
+			<a class="nav-link" style="color:#fff;" href=#>Logout<a/>
+		  </li>
+		  {%endif%}
 	  </div>
 	</nav>
 	<br>
