@@ -1,9 +1,31 @@
 {% extends "shop/base.html" %}
 {% load bootstrap3%}
 {% block body %}
+
+<div class="card border-warning mb-3" style="">
+  <div class="card-header">Hoş Geldiniz</div>
+  <div class="card-body text-warning">
+    <h4 class="card-title">Şimdi başlayın...</h4>
+    <p class="card-text">Keyifli bir alışveriş için doğru yerdesiniz. </p>
+  </div>
+</div>
+<br>
+<div class="list-group">
 	{% for v in vehiclelist %}
-	<div class="well">
-	<a href="{% url "vehicledetail" pk=v.pk %}">{{v}}</a>
-	</div>
+	{%if forloop.counter|divisibleby:2 %}
+	  <a href="{% url "vehicledetail" pk=v.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+	{% else %}
+	  <a href="{% url "vehicledetail" pk=v.pk %}" class="list-group-item list-group-item-action flex-column align-items-start active">
+	{%endif%}
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{v}}</h5>
+      <small>{{v.firm}}</small>
+    </div>
+    <p class="mb-1">{{v.description}}</p>
+    <small>{{v.price}} TL</small>
+  </a>
 	{% endfor %}
+
+</div>
+
 {% endblock %}

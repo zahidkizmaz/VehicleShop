@@ -3,30 +3,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{% bootstrap_css %}
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet" href="{% static "shop/css/bootstrap.min.css" %}">
 	<meta charset="utf-8">
 	<title>Title </title>
+
 </head>
 <body>
-	<a href={% url "home" %}>Home<a/>
-	<a href={% url "register" %}>Signup<a/>
-	<a href={% url "categorylist" %}>Categories<a/>
-	<a href={% url "firmlist" %}>Firms<a/>
-	<a href={% url "login" %}>Login<a/>
-	<a href={% url "createvehicle" %}> Create Vehicle </a>
-	<a href={% url "createbrand" %}> Create Brand </a>
-	<a href={% url "brandlist" %}>  Brands </a>
-	{%if role%}
-	<a href={% url "createfirm" %}> Create Firm/Add Member </a>
 
-	{%endif%}
-	<hr>
-	<hr>
-	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+	  <a class="navbar-brand" href="#">Vehicle Shop</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarColor02">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item active">
+			<a class="nav-link" href={% url "home" %}>Home<a/>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "register" %}>Signup<a/>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "categorylist" %}>Categories<a/>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "firmlist" %}>Firms<a/>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "createvehicle" %}> Create Vehicle </a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "createbrand" %}> Create Brand </a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "brandlist" %}>  Brands </a>
+		  </li>
+		  {%if role%}
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "createfirm" %}> Create Firm/Add Member </a>
+		  </li>
+		  {%endif%}
+		</ul>
+		  <li class="nav-item form-inline my-2 my-lg-0">
+			<a class="nav-link" style="color:#fff;" href={% url "login" %}>Login<a/>
+		  </li>
+	  </div>
+	</nav>
+	<br>
 	<div class="container">
 	{% block body %}
 
 	{% endblock %}
 	</div>
 </html>
+
