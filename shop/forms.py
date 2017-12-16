@@ -21,12 +21,15 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CreateVehicleForm(forms.ModelForm):
 
+    model = forms.IntegerField(required=True,max_value=9999,min_value=1000,help_text='4 haneli yıl giriniz.')
+
     def __init__(self, *args, **kwargs):
         super(CreateVehicleForm,self).__init__(*args, **kwargs)
     class Meta:
         model = Vehicle
         exclude = [
             "id",
+            "searched_counter"
         ]
 
         widgets = {
