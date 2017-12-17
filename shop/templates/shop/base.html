@@ -53,12 +53,9 @@
 			<a class="nav-link" style="color:#fff;" href={% url "login" %}>Login<a/>
 		  </li>
 		  {%else%}
-		<li class="nav-item form-inline my-2 my-lg-0">	 
-		  <form action="{% url "logout" %}" method="post" >
-            		{% csrf_token %}
-			<input type="hidden" value="/" name="next">
-			<button class="nav-link" style="color:red;">Logout</button></li>
-			</form>
+		<li class="nav-item form-inline my-2 my-lg-0">
+			<a class="nav-link" style="color:#fff;" href={% url "logout" %}>Logout<a/>
+		</li>
 		  {%endif%}
 	  </div>
 	</nav>
