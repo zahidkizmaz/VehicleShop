@@ -62,7 +62,7 @@ class Vehicle(models.Model):
     price = models.FloatField()
     user = models.ForeignKey(User, null=True)
     category = models.ForeignKey(Category, null=True, blank = True)
-    photo = models.ImageField(upload_to = 'vehicle_image',null=True, blank = True)
+    photo = models.ImageField(upload_to = 'vehicle_image',null=True, blank = True, default = 'vehicle_image/def_car.png')
     firm = models.ForeignKey(Firm, null=True, blank = True)
     searched_counter = models.IntegerField(default=0)
 
