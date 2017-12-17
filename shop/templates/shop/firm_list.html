@@ -2,6 +2,7 @@
 
 {% block body %}
 	{% for f in firmlist%}
-		{{f}} <br/>
+	<a href="{% url "firmvehiclelist" pk=f.pk %}">{{f}}<a>
+		<br/>
 	{% endfor %}
 {% endblock %}

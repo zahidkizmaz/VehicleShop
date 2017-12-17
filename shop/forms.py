@@ -21,7 +21,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CreateVehicleForm(forms.ModelForm):
 
-    model = forms.IntegerField(required=True,max_value=9999,min_value=1000,help_text='4 haneli yıl giriniz.')
+    model = forms.IntegerField(required=True,max_value=9999,min_value=1000,help_text='Year of car produced in 4 digit format. Like 1990 or 2012 etc...')
 
     def __init__(self, *args, **kwargs):
         super(CreateVehicleForm,self).__init__(*args, **kwargs)

@@ -1,0 +1,14 @@
+{% extends "shop/base.html" %}
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-3">{{firm}}</h1>
+    <div class="list-group">
+        {% for v in vehiclelist %}
+          <a href="{% url "vehicledetail" pk=v.pk %}" class="list-group-item list-group-item-action">
+            {{v}}
+          </a>
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endblock %}

@@ -235,3 +235,30 @@ class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
         context["pagesize"] = 'A4'
         context["title"] = 'Brand Details'
         return context
+
+
+class FirmDetailView(generic.DetailView):
+
+    def get_queryset(self):
+        return Firm.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehiclelist"] = Vehicle.objects.filter(firm__pk=self.kwargs["pk"]).order_by("searched_counter")
+        context["firm"] = Firm.objects.get(pk=self.kwargs.get("pk"))
+        return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
