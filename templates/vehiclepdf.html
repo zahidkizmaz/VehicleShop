@@ -1,3 +1,34 @@
+
+<center>
+  <h1><strong>{{vehicle.0.brand}} - {{vehicle.0.model}} -  {{vehicle.0.price}}</strong></h1>
+</center>
+<table style="border:0.5px solid black; text-align:center; padding:1px; " >
+  <tr>
+    <th>Model</th>
+    <th>Brand</th>
+    <th>KM Age</th>
+    <th>Engine</th>
+    <th>Transmission</th>
+    <th>Fuel</th>
+    <th>Color</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Firm</th>
+  </tr>
 {% for v in vehicle %}
-{{v}}
-{% endfor %}
+
+	<tr>
+	<td>{{v.model}}</td>
+	<td>{{v.brand}}</td>
+	<td>{{v.km}}</td>
+	<td>{{v.engine}}</td>
+	<td>{{v.transmission}}</td>
+	<td>{{v.fuel}}</td>
+	<td>{{v.color}}</td>
+	<td>{{v.price}}</td>
+	<td>{{v.category}}</td>
+	<td>{{v.firm}}</td>
+	</tr>
+
+  {% endfor %}
+</table>
