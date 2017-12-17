@@ -1,7 +1,36 @@
 <div class="well">
-	{% for b in brandlist %}
 	<center>
-	<strong>{{b}}</strong>
-	</br>
+		<h1><strong>{{brandlist.0.brand}}</strong></h1>
+	</center>
+
+<table style="border:0.5px solid black; text-align:center; padding:1px; " >
+  <tr>
+    <th>Model</th>
+    <th>Brand</th> 
+    <th>KM Age</th>
+    <th>Engine</th>
+    <th>Transmission</th> 
+    <th>Fuel</th>
+    <th>Color</th>
+    <th>Price</th>
+    <th>Category</th> 
+    <th>Firm</th>
+  </tr>
+	{% for b in brandlist %}
+
+  	<tr>
+	  <td>{{b.model}}</td>
+	  <td>{{b.brand}}</td>
+	  <td>{{b.km}}</td>
+	  <td>{{b.engine}}</td>
+	  <td>{{b.transmission}}</td>
+	  <td>{{b.fuel}}</td>
+	  <td>{{b.color}}</td>
+	  <td>{{b.price}}</td>
+	  <td>{{b.category}}</td>
+	  <td>{{b.firm}}</td>
+  	</tr>
+
 	{% endfor %}
+</table>
 </div>
