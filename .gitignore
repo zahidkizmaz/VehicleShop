@@ -5,7 +5,7 @@ __pycache__/
 .idea/
 # C extensions
 *.so
-
+shop/media
 # Distribution / packaging
 .Python
 env/
