@@ -4,7 +4,7 @@
 {% block body %}
 <div class="jumbotron">
   <h1 class="display-3">Create Vehicle</h1>
-  <form action="." method="post">
+  <form action="." method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
       <p class="lead">
