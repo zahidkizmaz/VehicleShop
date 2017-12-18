@@ -1,4 +1,5 @@
 {% extends "shop/base.html" %}
+{% load static %}
 {% block body %}
 <div class="jumbotron">
   <h1 class="display-3">Category List</h1>
@@ -16,4 +17,16 @@
 	{% endfor %}
 	</div>
 </div>
+<center>
+
+	  {% if rand == 1 %}
+    		<img src="{% static "shop/ads/1.jpg" %}" alt="" style="height: 300px; width: 500px; display: block; margin:10px;">
+	  {% elif rand == 2 %}
+	  		<img src="{% static "shop/ads/2.jpg" %}" alt="" style="height: 300px; width: 500px; display: block; margin:10px;">
+	  {% elif rand == 3 %}
+	  		<img src="{% static "shop/ads/3.jpg" %}" alt="" style="height: 300px; width: 500px; display: block; margin:10px;">
+	  {%endif%}
+
+</center>
+
 {% endblock %}

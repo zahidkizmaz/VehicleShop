@@ -7,6 +7,7 @@ from django.views import generic
 from django.core.urlresolvers import reverse_lazy
 from easy_pdf.views import PDFTemplateView, PDFTemplateResponseMixin
 from django.db.models import Q
+import random
 
 
 class CategoryView(generic.ListView):
@@ -17,6 +18,7 @@ class CategoryView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categorylist"] = Category.objects.all()
+        context["rand"] = random.randint(1,3)
         if self.request.user.is_authenticated:
             context["role"] = self.request.user.role
         else:
@@ -73,6 +75,7 @@ class BrandView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["brandlist"] = Brand.objects.all()
+        context["rand"] = random.randint(1, 3)
         if self.request.user.is_authenticated:
             context["role"] = self.request.user.role
         else:
