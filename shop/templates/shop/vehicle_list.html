@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load bootstrap3%}
+{% load static %}
 {% block body %}
 
 {% if not user.is_authenticated %}
@@ -36,4 +37,14 @@
 </div>
 </div>
 
+<center>
+<img src="{% static "shop/social.png" %}" usemap="#image-map">
+
+<map name="image-map">
+    <area target="" alt="Facebook|Hatice ERDİRİK" title="Facebook|Hatice ERDİRİK" href="https://www.facebook.com/erdrk.hatice" coords="0,36,33,42,38,12,9,5,0,36" shape="poly">
+    <area target="" alt="Twitter|Hatice ERDİRİK" title="Twitter|Hatice ERDİRİK" href="https://twitter.com/HaticeErdirik" coords="35,10,38,5,66,12,59,41,35,37,38,13" shape="poly">
+    <area target="" alt="Instagram|Hatice ERDİRİK" title="Instagram|Hatice ERDİRİK" href="https://www.instagram.com/htcerdirik/" coords="64,11,67,6,93,14,88,41,63,37" shape="poly">
+    <area target="" alt="LinkedIn|Hatice ERDİRİK" title="LinkedIn|Hatice ERDİRİK" href="https://www.linkedin.com/in/haticerdirik/" coords="89,10,91,4,119,11,114,41,89,38,93,13" shape="poly">
+</map>
+</center>
 {% endblock %}
