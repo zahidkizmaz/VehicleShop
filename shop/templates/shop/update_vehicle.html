@@ -2,7 +2,7 @@
 {% load bootstrap3%}
 {% block body %}
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data" >
 	{% csrf_token %}
 	{% bootstrap_form form %}
 	<input type="submit" value="Update"/>
