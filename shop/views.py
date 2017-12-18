@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from shop.forms import CustomUserCreationForm, CreateVehicleForm, CreateBrandForm,CreateFirmForm,AddMemberForm
@@ -7,6 +6,7 @@ from .models import Category, Vehicle, Firm, Brand, User
 from django.views import generic
 from django.core.urlresolvers import reverse_lazy
 from easy_pdf.views import PDFTemplateView, PDFTemplateResponseMixin
+from django.db.models import Q
 
 
 class CategoryView(generic.ListView):
@@ -16,7 +16,11 @@ class CategoryView(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categorylist"] = Category.objects.all() 
+        context["categorylist"] = Category.objects.all()
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 class HomePageView(generic.ListView):
@@ -41,6 +45,10 @@ class FirmView(LoginRequiredMixin,generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["firmlist"] = Firm.objects.all()
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 
@@ -65,6 +73,10 @@ class BrandView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["brandlist"] = Brand.objects.all()
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 class CreateVehicleView(LoginRequiredMixin, generic.CreateView):
@@ -99,6 +111,10 @@ class VehicleView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 
@@ -115,6 +131,10 @@ class DeleteVehicleView(LoginRequiredMixin,generic.DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 
@@ -144,6 +164,10 @@ class CreateFirmView(LoginRequiredMixin, generic.FormView):
             context['form'] = self.form_class
         else:
             context['form'] = self.second_form_class
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
     def post(self, request, *args, **kwargs):
@@ -183,6 +207,10 @@ class CategoryDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context["vehiclelist"] = Vehicle.objects.filter(category__pk=self.kwargs["pk"]).order_by("searched_counter")
         context["cat"] = Category.objects.get(pk=self.kwargs.get("pk"))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
 
@@ -220,9 +248,11 @@ class BrandDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context["vehiclelist"] = Vehicle.objects.filter(brand__pk=self.kwargs["pk"]).order_by("searched_counter")
         context["brand"] = Brand.objects.get(pk=self.kwargs.get("pk"))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
-
-
 
 class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
     model = Brand
@@ -236,7 +266,6 @@ class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
         context["title"] = 'Brand Details'
         return context
 
-
 class FirmDetailView(generic.DetailView):
 
     def get_queryset(self):
@@ -246,8 +275,38 @@ class FirmDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context["vehiclelist"] = Vehicle.objects.filter(firm__pk=self.kwargs["pk"]).order_by("searched_counter")
         context["firm"] = Firm.objects.get(pk=self.kwargs.get("pk"))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
         return context
 
+class MyfirmView(generic.ListView):
+
+    template_name = "shop/myfirm_list.html"
+    def get_queryset(self):
+        try:
+            return Firm.objects.get(manager=self.request.user)
+        except Firm.DoesNotExist:
+            return None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            f=Firm.objects.get(manager=self.request.user)
+        except Firm.DoesNotExist:
+            f=None
+        if f is None:
+            context["vehicles"] = Vehicle.objects.filter(user=self.request.user)
+        else:
+            context["firm"] = f
+            context["vehicles"] = Vehicle.objects.filter(Q(user=self.request.user)|Q(firm=f))
+            context["users"] = User.objects.filter(Q(firm=f) & ~Q(role=1))
+        if self.request.user.is_authenticated:
+            context["role"] = self.request.user.role
+        else:
+            context["role"] = False
+        return context
 
 
 

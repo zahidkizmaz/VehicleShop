@@ -28,10 +28,10 @@
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "brandlist" %}>  Brands </a>
 		  </li>
-			{% if user.is_authenticated %}
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "firmlist" %}>Firms<a/>
 		  </li>
+			{% if user.is_authenticated %}
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "createvehicle" %}> Create Vehicle </a>
 		  </li>
@@ -41,6 +41,13 @@
 		  {%if role%}
 		  <li class="nav-item">
 			<a class="nav-link" href={% url "createfirm" %}> Create Firm/Add Member </a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href={% url "myfirm" %}> My Firm </a>
+		  </li>
+			{%else%}
+			<li class="nav-item">
+			<a class="nav-link" href={% url "myfirm" %}> My Vehicles </a>
 		  </li>
 		  {%endif%}
 		  {%endif%}

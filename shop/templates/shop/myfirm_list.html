@@ -1,0 +1,64 @@
+{% extends "shop/base.html" %}
+{% block body %}
+<div class="jumbotron">
+    {%if firm%}
+  <h1 class="display-3">My Firm</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card border-primary mb-3" style="">
+                <div class="card-header">Firm Info</div>
+                    <div class="card-body text-primary">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center active">
+                                Name : {{firm.name}}<a href="" ></a>
+                             </li>
+                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Address : {{firm.address}}
+                             </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                GSM : {{firm.gsm}}
+                          </a>   </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Mail : {{firm.mail}}
+                        </ul>
+                    </div>
+            </div>
+
+    </div>
+    <div class="col-lg-4">
+         <div class="card border-primary mb-3" style="">
+                <div class="card-header">Employees</div>
+                    <div class="card-body text-primary">
+                        <ul class="list-group">
+                            {% for u in users %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{u}}
+                                <a href="" ><span class="badge badge-primary badge-pill">Discharge</span></a>
+                             </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+         </div>
+    </div>
+        {%else%}
+    <h1 class="display-3">My Vehicles</h1>
+        <div class="col-lg-4">
+         <div class="card border-primary mb-3" style="">
+                <div class="card-header">Vehicles</div>
+                    <div class="card-body text-primary">
+                        <ul class="list-group">
+                            {% for v in vehicles %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{v}}
+                                <a href="{% url "updatevehicle" pk=v.pk %}" ><span class="badge badge-primary badge-pill" >Edit</span></a>
+                                <a href="" ><span class="badge badge-primary badge-pill">Delete</span></a>
+                             </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+         </div>
+    </div>
+    {%endif%}
+    </div>
+</div>
+{%endblock%}
