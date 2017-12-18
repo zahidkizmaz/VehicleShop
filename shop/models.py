@@ -106,7 +106,7 @@ class SoldVehicles(models.Model):
     price = models.FloatField()
     user = models.ForeignKey(User, null=True)
     category = models.ForeignKey(Category, null=True)
-    photo = models.OneToOneField(Photo, null=True, blank = True)
+    # photo = models.OneToOneField(Photo, null=True, blank = True)
     firm = models.ForeignKey(Firm, null=True, blank = True)
     searched_counter = models.IntegerField(default=0)
 
