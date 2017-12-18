@@ -133,7 +133,7 @@ class DeleteVehicleView(LoginRequiredMixin,generic.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+        context["vehicle"] = Vehicle.objects.get(pk=self.kwargs.get("pk"))
         if self.request.user.is_authenticated:
             context["role"] = self.request.user.role
         else:

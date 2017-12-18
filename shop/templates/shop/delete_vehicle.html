@@ -1,11 +1,13 @@
 {% extends "shop/base.html" %}
 {% load bootstrap3%}
 {% block body %}
-
-<form action="" method="post">
+<center>
+<div class="alert alert-dismissible alert-danger col-lg-4">
+	<form action="" method="post">
 	{% csrf_token %}
-	Are you sure you want to buy this car {{ vehicle }}
-	<input type="submit" value="Buy"/>
-</form>
-
+ Are you sure you want to buy this car {{ vehicle }}
+	<input type="submit" class="btn btn-success" value="Buy"/>
+	</form>
+</div>
+</center>
 {% endblock %}

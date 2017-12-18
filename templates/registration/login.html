@@ -1,11 +1,17 @@
 {% extends "shop/base.html" %}
 
 {% block body %}
-
-<form style="text-align:center;" action="." method="POST">
+<center>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Login</div>
+  <div class="card-body text-primary">
+    <form style="text-align:center;" action="." method="POST">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
-	{{ form }}
+	{{ form.as_p }}
 	<button type="submit">Login</button>
+  </div>
+</div>
+</center>
 
 {% endblock %}
