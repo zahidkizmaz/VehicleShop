@@ -2,10 +2,23 @@
 {% load bootstrap3%}
 {% block body %}
 <center>
-<div class="alert alert-dismissible alert-danger col-lg-4">
+
 	<form action="" method="post">
 	{% csrf_token %}
- Are you sure you want to buy this car {{ vehicle }}
+	<h2> 
+	Brand:	{{vehicle.brand }}
+	&nbsp;
+	&nbsp;
+	Price:	{{vehicle.price }} TL
+	</h2>
+
+	<img src="{{ vehicle.photo.url }}" width="800" height="600">
+	<br>
+
+	<div class="alert alert-dismissible alert-danger col-lg-4">
+
+		Are you sure you want to buy this car for {{vehicle.price}} TL ?
+		<br>	
 	<input type="submit" class="btn btn-success" value="Buy"/>
 	</form>
 </div>
