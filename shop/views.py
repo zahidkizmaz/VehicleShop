@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse_lazy
 from easy_pdf.views import PDFTemplateView, PDFTemplateResponseMixin
 from django.db.models import Q
 import random
+import urllib.request
+import json
 
 
 class CategoryView(generic.ListView):
@@ -25,7 +27,9 @@ class CategoryView(generic.ListView):
             context["role"] = False
         return context
 
+
 class HomePageView(generic.ListView):
+    apiUrl = 'https://api.fixer.io/latest?base=TRY'
 
     def get_queryset(self):
         return Vehicle.objects.all()
@@ -33,11 +37,17 @@ class HomePageView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["vehiclelist"] = Vehicle.objects.all()
+        res = urllib.request.urlopen(self.apiUrl).read()
+        res = res.decode("utf-8")
+        j = json.loads(res)
+        context["EUR"] = 1/j['rates']['EUR']
+        context["USD"] = 1 / j['rates']['USD']
         if self.request.user.is_authenticated:
             context["role"] =self.request.user.role
         else:
             context["role"] = False
         return context
+
 
 class FirmView(LoginRequiredMixin,generic.ListView):
 
@@ -67,6 +77,7 @@ class RegistrationView(generic.FormView):
         form.save()
         return super().form_valid(form)
 
+
 class BrandView(generic.ListView):
 
     def get_queryset(self):
@@ -81,6 +92,7 @@ class BrandView(generic.ListView):
         else:
             context["role"] = False
         return context
+
 
 class CreateVehicleView(LoginRequiredMixin, generic.CreateView):
     form_class = CreateVehicleForm
@@ -106,7 +118,7 @@ class CreateBrandView(LoginRequiredMixin,generic.CreateView):
 
 
 class VehicleView(generic.DetailView):
-   
+
     def get_queryset(self):
         return Vehicle.objects.all()
 
@@ -114,6 +126,7 @@ class VehicleView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["vehicle"] = Vehicle.objects.filter(pk=self.kwargs.get("pk"))
+
         if self.request.user.is_authenticated:
             context["role"] = self.request.user.role
         else:
@@ -257,6 +270,7 @@ class BrandDetailView(generic.DetailView):
             context["role"] = False
         return context
 
+
 class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
     model = Brand
     template_name = 'brandvehicles_pdf.html'
@@ -268,6 +282,7 @@ class BrandVehiclesView(PDFTemplateResponseMixin, generic.DetailView):
         context["pagesize"] = 'A4'
         context["title"] = 'Brand Details'
         return context
+
 
 class FirmDetailView(generic.DetailView):
 
@@ -283,6 +298,7 @@ class FirmDetailView(generic.DetailView):
         else:
             context["role"] = False
         return context
+
 
 class MyfirmView(generic.ListView):
 
@@ -310,17 +326,3 @@ class MyfirmView(generic.ListView):
         else:
             context["role"] = False
         return context
-
-
-
-
-
-
-
-
-
-
-
-
-
-

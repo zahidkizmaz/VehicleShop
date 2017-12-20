@@ -13,8 +13,16 @@
   </div>
 </div>
 </center>
-<br>
+{% else %}
+<center>
+<div class="card border-success mb-3" style="width:125px;padding-top:1%;">
+    <p>1 EUR = {{ EUR|floatformat:4 }}</p>
+    <p>1 USD = {{ USD|floatformat:4 }}</p>
+  </div>
+</center>
 {%endif%}
+<br>
+
 
 <div class="jumbotron">
         <h1 class="display-3">Vehicles</h1>
